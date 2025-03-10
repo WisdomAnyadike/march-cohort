@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="input1" type="text"> <button onclick="sendSentenceToMyJs()"> click me </button>
+
+    <!-- <p> heyyyy </p> -->
+
+    <div id="preview">
+
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let theInput = document.getElementById('input1')
+    let div = document.getElementById('preview')
+    // console.log(theInput);
+    // theInput.value = 'hello class'
+
+
+
+    function sendSentenceToMyJs() {
+
+        let userValue = theInput.value.toLowerCase() // SHIT
+
+        let sensoredText = userValue.replaceAll("shit", "****").replaceAll('fuck', "****").replaceAll('stupid', "******").replaceAll("foolish", "*******")
+
+
+        div.innerText = sensoredText
+        console.log();
+
+    }
+
+
+    let string = 'adfsgas24tsugdefuyrgh3454673638'
+    string = parseInt(string)
+    console.log(string, typeof string);
+
+    //0.0000
+    console.log(Math.floor(Math.random() * 10)); // 1 - 10 ceil // 0 - 9 floor
+
+    console.log(Math.random());
+    console.log(Math.ceil(0.0001));
+
+
+
+</script>

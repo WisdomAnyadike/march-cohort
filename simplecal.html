@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input1" type="text"> <input id="input2" type="text">
+    <button onclick="add()"> + </button>
+    <button onclick="divide()"> / </button>
+    <button onclick="multiply()"> * </button>
+    <button onclick="subtract()"> - </button>
+
+    <div id="display">
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let input1 = document.getElementById('input1')
+    let input2 = document.getElementById('input2')
+
+    function add() {
+        let addition = parseFloat(input1.value) + parseFloat(input2.value);
+        document.getElementById("display").innerText = addition;
+    }
+
+    function divide() {
+        let division = parseFloat(input1.value) / parseFloat(input2.value);
+        document.getElementById("display").innerText = division;
+    }
+
+    function subtract() {
+        let subtraction = parseFloat(input1.value) - parseFloat(input2.value);
+        document.getElementById("display").innerText = subtraction;
+    }
+
+    function multiply() {
+        let multiplication = parseFloat(input1.value) * parseFloat(input2.value);
+        document.getElementById("display").innerText = multiplication;
+    }
+
+
+
+</script>

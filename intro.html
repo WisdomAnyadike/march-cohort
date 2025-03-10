@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="po">
+
+    </div>
+    <div>
+
+        <pre>i          love js </pre>
+    </div>
+
+</body>
+
+</html>
+<script>
+    let myNumber = 20.3
+    let string = `Hello`
+    let myFirstBoolean = true
+    let container = null
+    let value
+
+    console.log(value);
+
+    let sym1 = Symbol() //*536
+    let sym2 = Symbol()
+
+    console.log(sym1);
+
+    let ourID = Symbol('ID')
+
+    // let myUser = {
+    //     [ourID]: '234'
+    // }
+
+
+    // let myObj = new Object()
+
+    let SQI = {
+        location: 'dugbe',
+        name: 'SQI',
+        years: 14,
+        isOutstanding: true,
+        jump: function () {
+            console.log('i am jumpiong');
+        }
+    }
+
+    SQI.jump()
+
+
+
+
+    console.log(SQI.location);
+    console.log(SQI['location']);
+
+
+    console.log(SQI);
+
+    // let arr = new Array()
+
+    let arr = ['wisdom', 23, 'sqi', undefined, null, true]
+
+    console.log(arr[1]);
+    arr[1] = 25
+    console.log(arr);
+
+    // console.log(arr.indexOf('sqi'));
+
+    let word = 'Javascript'
+    console.log(word[4]);
+
+    word = 'python'
+    console.log(word.length);
+    console.log(word[4]);
+
+    // word[4] = 't'
+
+    let emptyString = 'i love js so much '
+    console.log(emptyString);
+    console.log(emptyString.length);
+
+    let first = 'i'
+    let second = 'love'
+    let third = 'js'
+    let space = ' '
+
+
+    let sentence = first + space + second + space + third
+    let mySentence = `${first} ${second} ${third}`
+
+    console.log(sentence);
+    console.log(mySentence);
+
+    let a = 5
+    let b = 20
+
+    let mySecondSentence = 'the sum of ' + a + ' and ' + b + ' is ' + (a + b)
+    console.log(mySecondSentence)
+    let myThirdSentence = `the sum of ${a} and ${b} is ${a + b}`
+    console.log(myThirdSentence);
+    let ans = a + b
+
+    // let string1 = {
+    //     toUpperCase: function () {
+    //         console.log('i an uppercase');
+    //     }
+
+    // }
+
+
+    let myString1 = 'school of thought '
+
+    let newGuy = myString1.toUpperCase()
+    console.log(newGuy);
+
+    let newGuytoLower = newGuy.toLowerCase()
+
+    // let window = {
+    //     alert : Function,
+    //     prompt: function name(params) {
+
+    //     }
+    // }
+
+
+
+    // window.alert('hello')
+    // prompt('enter value', 'i am the placeholder')
+
+
+    console.log(myString1.substr(10, 7));
+
+    console.log(myString1.slice(10, 17));
+
+
+    let string2 = '30 Days Of JavaScript Days'
+
+    let arr2 = string2.split('s  ')
+    console.log(arr2);
+
+
+    let val = ' neutral      '
+    console.log(val.length);
+    val = val.trimEnd()
+    console.log(val.length);
+
+
+    string2 = string2.replaceAll('Days', 'Months')
+    console.log(string2);
+
+    // 30 Months-Of JavaScript
+
+
+
+</script>
