@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    <img src="https://5.imimg.com/data5/WL/SG/MY-8835990/10w-gls-light-bulb.jpg" width="100" height="100"> -->
+
+    <button onclick="changeBackground()"> light/dark </button>
+
+    <img id="image"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlG6pV6IG0pV4SMx54Y8N1kQAOiYlXH-MNCcJgxYU44jPPAKCFadj1pHMvcTfI7GOI8mM&usqp=CAU"
+        width="100" height="100">
+
+
+    <button onclick="switchBulb()"> click me</button>
+
+</body>
+
+</html>
+<script>
+    let num = 0
+
+
+    if (num > 0) {
+        num += 1
+    } else {
+        num -= 1
+    }
+
+    console.log(num);
+
+    let weather = '123456' // sunny , windy , snowy , normal , rainy
+
+    if (weather === 'sunny') {
+        console.log('its sunny outside, get a shade');
+    } else if (weather === 'rainy') {
+        console.log('its rainy outside, get an umbrella');
+    } else if (weather === 'windy') {
+        console.log('weather is windy ');
+    } else if (weather === 'normal') {
+        console.log('weather is normal');
+    } else {
+        console.log('weather is snowy');
+    }
+
+
+    let key = 'weDnesday  '.trim().toLowerCase()
+
+    switch (key) {
+        case 'monday':
+            console.log('wow, the week just started');
+            break;
+        case 'tuesday':
+            console.log('wow, its tuesday already');
+            break;
+        case 'wednesday':
+            console.log('wow, its conditionals day');
+            break;
+
+        default:
+            console.log('wow, im not aware of this day');
+            break;
+    }
+
+
+
+    switch (true) {
+        case (10 < 4):
+            console.log('whats good');
+            break;
+        case (10 < 20):
+            console.log('js sef');
+            break;
+        case (2 == '2'):
+            console.log('hmmm');
+            break;
+        default:
+            console.log('i know book');
+            break;
+    }
+
+
+    2 === '2' ? console.log('it is true') : console.log('it is false');
+
+
+    let isBulbOn = false
+
+    function switchBulb() {
+
+        if (isBulbOn === false) {
+            document.getElementById('image').src = 'https://5.imimg.com/data5/WL/SG/MY-8835990/10w-gls-light-bulb.jpg'
+            // isBulbOn = true
+
+        } else {
+            document.getElementById('image').src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlG6pV6IG0pV4SMx54Y8N1kQAOiYlXH-MNCcJgxYU44jPPAKCFadj1pHMvcTfI7GOI8mM&usqp=CAU'
+            // isBulbOn = false
+
+        }
+
+        isBulbOn = !isBulbOn
+
+
+    }
+
+    document.body.style.backgroundImage = 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EZNefY1fRsA4qVFTBviWyj-5KHY6U8LG0g&s)'
+    document.body.style.backgroundRepeat = 'no-repeat'
+    document.body.style.backgroundSize = 'cover'
+
+    function changeBackground() {
+        // console.log(document.body.style.backgroundColor);
+
+        // if (document.body.style.backgroundImage === '') {
+        //     document.body.style.backgroundColor = 'black'
+        // } else {
+        //     document.body.style.backgroundColor = ''
+        // }
+        console.log(document.body.style.backgroundImage);
+
+        document.body.style.backgroundImage == 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EZNefY1fRsA4qVFTBviWyj-5KHY6U8LG0g&s")'
+            ?
+            document.body.style.backgroundImage = 'url(https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/f8/5c/05/picture-lake.jpg?w=1200&h=-1&s=1)'
+            :
+            document.body.style.backgroundImage = 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EZNefY1fRsA4qVFTBviWyj-5KHY6U8LG0g&s)'
+
+
+    }
+
+</script>
