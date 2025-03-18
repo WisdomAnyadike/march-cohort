@@ -17,16 +17,32 @@
     <button onclick="add(5)"> 5 </button>
     <button onclick="add(6)"> 6 </button>
     <button onclick="add('+')"> + </button>
-   <button onclick="answer()" > = </button>
+    <button onclick="answer()"> = </button>
+
+    <div id="preview">
+
+    </div>
 
 </body>
 
 </html>
 <script>
     let input = document.getElementById('myInput')
+    let output = document.getElementById('preview')
 
     function add(num) {
         input.value += num
+    }
+
+    function answer(params) {
+        let text = input.value.trim()
+        let arr = text.split('+')
+        console.log(arr);
+        let finalAns = (+arr[0]) + (+arr[1])
+        console.log(finalAns);
+        input.value = finalAns
+        output.innerHTML = finalAns
+
     }
 
 
@@ -46,9 +62,18 @@
 
 
 
+    function muliplyTwoValues(num1, num2) {
+
+        return
+
+        console.log('23');
+    }
 
 
+    console.log(muliplyTwoValues(2, 5), typeof muliplyTwoValues('2', '5'));
 
+    let finalValue = muliplyTwoValues(34, 2) + muliplyTwoValues(23, 5)
+    console.log(finalValue);
 
 
 
@@ -90,7 +115,7 @@
     calculate(12, 34, '+')
     calculate(5, 6, '-')
     calculate(55, 5, '/')
-    calculate(2, 5, '*')
+    calculate(2, 5, '*');
 
 
 
@@ -101,10 +126,10 @@
 
 
 
-        // IIFE
-        (function hmmm(params) {
-            console.log('wow');
-        })()
+    // IIFE
+    (function hmmm(params) {
+        console.log('wow');
+    })()
 
 
     //arrow function
