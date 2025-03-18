@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="myInput">
+
+    <button onclick="add(1)"> 1 </button>
+    <button onclick="add(2)"> 2 </button>
+    <button onclick="add(3)"> 3 </button>
+    <button onclick="add(4)"> 4 </button>
+    <button onclick="add(5)"> 5 </button>
+    <button onclick="add(6)"> 6 </button>
+    <button onclick="add('+')"> + </button>
+   <button onclick="answer()" > = </button>
+
+</body>
+
+</html>
+<script>
+    let input = document.getElementById('myInput')
+
+    function add(num) {
+        input.value += num
+    }
+
+
+    let name = "aisha"
+
+    console.log(myFunc);
+
+    //function expression
+    var myFunc = function (params) {
+        console.log('hello');
+    }
+
+    myFunc()
+    let smth = 'hello';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // function declaration
+    // function wow(name1 , name2) {
+    //     console.log('hi' + name1);
+    //     console.log('hi' + name2);
+    // }
+
+
+
+    // wow('wisdom' , 'aisha')
+
+    // wow('david' , 'daniel')
+
+    // wow('lol' , 'run');
+
+
+    function calculate(firstNum, secondNum, symbol) {
+        if (symbol === '+') {
+            console.log(firstNum + secondNum);
+        } else if (symbol === '-') {
+            console.log(firstNum - secondNum);
+        } else if (symbol === '/') {
+            console.log(firstNum / secondNum);
+        } else {
+            console.log(firstNum * secondNum);
+        }
+
+    }
+
+
+    calculate(12, 34, '+')
+    calculate(5, 6, '-')
+    calculate(55, 5, '/')
+    calculate(2, 5, '*')
+
+
+
+
+
+
+
+
+
+
+        // IIFE
+        (function hmmm(params) {
+            console.log('wow');
+        })()
+
+
+    //arrow function
+    let func1 = () => {
+
+    }
+
+    func1()
+
+
+
+
+
+
+
+</script>

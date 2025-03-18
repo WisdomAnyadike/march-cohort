@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .don {
+    /* background-image:url(); */
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+  }
+
+  .container {
+    width: 270px;
+    height: 300px;
+    border-radius: 10px;
+    color: #000;
+    background-color: white
+  }
+
+  .container button {
+    width: 70px;
+    height: 70px;
+    border: none;
+
+  }
+</style>
+
+<body>
+  <div class="don">
+    <div class="container">
+      <input type="text" id="input1">
+      <button onclick="guess()">click</button>
+      <p id="hope"></p>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  // var school 
+  // var house
+  //function guess (){
+
+  // }
+  // function stop(params) {
+
+  //   }
+
+
+  //scope
+
+  window.alert('hello')
+
+  stop()
+
+
+
+  let house = 'story building'
+  // console.log(house);
+
+  let output = document.getElementById('hope') // show our result
+  let input1 = document.getElementById('input1') // collect value from 0-9
+  let score = 0
+
+
+  // console.log(random);
+
+  function guess() {
+    console.log(house);
+
+    let random = Math.floor(Math.random() * 10) // 0 - 9
+    if (input1.value.trim() === '') {
+      alert('please enter a number')
+    } else if (isNaN(Number(input1.value))) {
+      alert('please enter a numeric value')
+    } else if (Number(input1.value) < 0 || Number(input1.value) > 9) {
+      alert('please enter a number between 0 - 9')
+    }
+    else if (Number(input1.value) === random) {
+      score++
+      output.innerHTML = `you are correct , your current score is ${score}`
+
+    } else {
+
+      output.innerHTML = `you are wrong , correct answer is ${random}`
+    }
+
+  }
+
+
+
+
+  console.log(isNaN('wgehd'));
+
+
+  function stop(params) {
+    console.log('hmmmmm');
+  }
+
+  console.log(house);
+  var school = 'sqi'
+
+
+  // if (condition) {
+  //   console.log(house);
+  // }
+
+
+  // let myName = 'wisdom'
+
+
+  function wow(params) {
+    console.log(myName);
+    var myName = 'david'
+    console.log(myName);
+  }
+  // console.log(myName);
+  wow()
+
+  // console.log(myName);
+
+  if (true) {
+    let hello = 'lets go'
+  }
+
+  console.log(hello);
+
+
+</script>
