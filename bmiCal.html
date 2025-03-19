@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="weight">
+    <input type="number" id="height">
+    <button onclick="displayBmi()">Find Bmi</button>
+    <p id="output"></p>
+
+
+</body>
+
+</html>
+<script>
+    let weight = document.getElementById('weight')
+    let height = document.getElementById('height')
+    let output = document.getElementById('output')
+
+    function displayBmi() {
+        let weightOutput = weight.value
+        let heightOutput = height.value
+        if (weightOutput.trim() === '' || heightOutput.trim() === '') {
+            alert('Please enter a value')
+        }
+        else {
+         let myBmi =  calculateBMI(heightOutput, weightOutput).toFixed(1)
+         if (myBmi  < 18.5) {
+            output.innerHTML = `the value of your BMI is ${myBmi},you are UNDERWEIGHT`
+         } else if(myBmi >= 18.5 && myBmi <= 24.9) {
+            output.innerHTML = `the value of your BMI is ${myBmi},you are NORMAL`
+            
+         }
+         else if (myBmi >24.9 && myBmi <= 29.9) {
+            output.innerHTML = `the value of your BMI is ${myBmi}, you are OVERWEIGHT`
+         }
+         else{
+            output.innerHTML = `the value of your BMI is ${myBmi}, you are obess`
+         }
+         }
+
+         }
+         
+    
+    
+    
+    function calculateBMI(height, weight) {
+        return weight / height ** 2
+
+    
+
+
+
+    }
+
+
+</script>

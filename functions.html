@@ -27,6 +27,7 @@
 
 </html>
 <script>
+
     let input = document.getElementById('myInput')
     let output = document.getElementById('preview')
 
@@ -139,10 +140,80 @@
 
     func1()
 
+    function runSmth(params) {
+        return function hello(params) {
+            return function (params) {
+                return 20
+            }
+        }
+    }
+
+    console.log(runSmth()()());
+
+    function arimethicCalculator(symbol) {
+        return function (num1, num2) {
+            if (symbol == '*') {
+                return num1 * num2
+            } else if (symbol == '-') {
+                return num1 - num2
+            }
+        }
+    }
+
+    console.log(arimethicCalculator('*')(2, 3));
+    console.log(arimethicCalculator('-')(2, 3));
+
+
+    function jump(num = 2, num2 = 5) {
+        console.log(num * num2);
+
+    }
+
+    jump()
+    jump(3, 4)
+    jump(6)
+
+    // function calBmi(weight = 0, height = 0) {
+    //     return weight / (height ** 2)
+    // }
 
 
 
 
+    // calBmi(input1.value, input2.value)
 
+
+    //lexical scoping
+    function a(params) {
+
+        let firstVariable = 'First Function'
+
+        console.log(firstVariable,);
+
+        return function b(params) {
+
+            let secondVariable = 'Second Function'
+            console.log(firstVariable, secondVariable);
+
+            return function c(params) {
+
+                let thirdVariable = 'Third Function'
+                console.log(firstVariable, secondVariable, thirdVariable);
+            }
+
+        }
+
+    }
+
+
+    a()()()
+
+    //void function
+    function run(params) {
+        let b = 3 + 4
+    }
+
+
+    console.log(run());
 
 </script>
