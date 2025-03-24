@@ -43,7 +43,7 @@
     }
 
 
-    const countries = ['Finland', 'Sweden', 'Denmark' , 'Norway']
+    const countries = ['Finland', 'Sweden', 'Denmark', 'Norway']
     const newArr = []
 
     for (let i = countries.length - 1; i >= 0; i--) {
@@ -52,9 +52,50 @@
 
     console.log(newArr);
 
-// ["FINLAND", "SWEDEN", "DENMARK", "NORWAY", "ICELAND"]
+    // ["FINLAND", "SWEDEN", "DENMARK", "NORWAY", "ICELAND"]
 
 
 
+    let i = 6
+    while (i <= 5) {
+        console.log(i)
+        i++
+    }
+
+    // 0 1 2 3 4 5
+
+    let w = 6
+    do {
+        console.log(w)
+        w++
+    } while (w <= 5)
+
+    // // 0 1 2 3 4 5
+
+    let keys = ['rice', 'beans', 'mango']
+
+    for (k of keys) {
+        if (k === "beans") {
+
+
+            continue
+        }
+        console.log(k);
+
+
+
+
+
+    }
+
+    for (let i = 0; i < 11; i++) {
+
+        if (i % 2 === 1) {
+            continue
+        }
+
+        console.log(i)
+
+    }
 
 </script>

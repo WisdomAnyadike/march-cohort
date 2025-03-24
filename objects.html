@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    // const person = new Object()
+    let person = {
+        name: 'tolu',
+        class: 'js',
+        school: 'sqi',
+        age: 12,
+        status: undefined,
+        friends: ['bola', 'dami', 'shola'],
+        gender: {
+            sex: 'male'
+        },
+        introduce: function () {
+            console.log(`i am ${this.name}`);
+        }
+    }
+
+    person.name = 'yemisi'
+    person.class = 'react'
+
+    person['name']
+
+    // let language = 'javaScript'
+    // language[4] = 's'
+
+    person.introduce()
+    person.village = 'ijebu ode'
+    console.log(person);
+
+
+
+    for (const key in person) {
+
+        console.log(`key: ${key} , value: ${person[key]}`);
+    } 
+
+    
+</script>
