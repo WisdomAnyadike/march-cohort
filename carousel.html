@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #121212;
+            color: #fff;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(32, 32, 32, 0.95);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .student-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #764ba2;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .student-image:hover {
+            transform: scale(1.1);
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .course {
+            font-size: 18px;
+            color: #a29bfe;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .student-id {
+            font-size: 14px;
+            color: #b2bec3;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.7);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(118, 75, 162, 1);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="innerContainer">
+            
+        </div>
+
+        <div class="buttons">
+            <button onclick="toPrev()">❮ Previous</button>
+            <button onclick="toNext()">Next ❯</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // let image = document.getElementById('studentImage')
+    // let studentName = document.getElementById('studentName')
+    // let studentCourse = document.getElementById('studentCourse')
+    // let studentId = document.getElementById('studentID')
+    let innerContainer = document.getElementById("innerContainer")
+    let index = 0
+
+    let students = [
+        {
+            name: 'Babatunde',
+            course: 'SOFTWARE ENGINEERING',
+            studentID: 202456,
+            image: "https://img.freepik.com/free-photo/portrait-upset-american-black-person_23-2148749581.jpg?semt=ais_hybrid"
+        },
+        {
+            name: 'Evian',
+            course: 'UI/UX',
+            studentID: 202490,
+            image: 'https://watershed.co.uk/archive-sites/rifemagazine/wp-content/uploads/2020/11/IMG_9305-scaled.jpg'
+        },
+        {
+            name: 'Joselyn',
+            course: 'GRAPHIC DESIGN',
+            studentID: 202183,
+            image: 'https://img.freepik.com/free-photo/front-view-woman-with-afro-hairstyle_23-2150908604.jpg'
+        },
+        {
+            name: 'Ariyo',
+            course: 'DATA SCIENCE',
+            studentID: 202567,
+            image: "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
+        },
+    ];
+
+    function disStudents() {
+        // image.src = students[index].image
+        // studentName.innerHTML = students[index].name
+        // studentCourse.innerHTML = students[index].course
+        // studentId.innerHTML = students[index].studentID
+        innerContainer.innerHTML=`<img id="studentImage" class="student-image"
+            src="${students[index].image}"
+            alt="Student Image">
+        <h3 id="studentName">${students[index].name} </h3>
+        <p id="studentCourse" class="course"> ${students[index].course}</p>
+        <p id="studentID" class="student-id">${students[index].studentID}</p>`
+
+
+        
+    }
+    disStudents();
+
+    let toNext =() => {
+        index === students.length -1 ? index = 0 : index = ++index
+        disStudents()
+
+        // if (index === students.length -1) {
+        //     index = 0
+        // } else {
+        //     index = index + 1
+        // }
+        
+    }
+    let toPrev =() => {
+        index = index === 0 ? students.length - 1 : --index
+        // if (index === 0 ) {
+        //     index = students.length -1
+        // } else {
+        //     index = index - 1
+        // }
+        disStudents()
+    }
+
+   
+
+
+
+</script>
