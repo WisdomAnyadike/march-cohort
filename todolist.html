@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inputTodo"> <button onclick="addTodo()"> add todo</button>
+
+    <div id="preview">
+
+
+    </div>
+</body>
+
+</html>
+<script>
+    let todos = []
+
+    function addTodo() {
+        todos.push(inputTodo.value.toLowerCase())
+        console.log(todos);
+        inputTodo.value = ''
+        display()
+    }
+
+    function editTodo(i) {
+        console.log(i);
+        let userText = prompt('edit here', ' type in here')
+        console.log(userText);
+        if (userText === null || userText.trim() === '') {
+            alert('please add a value')
+        } else {
+            todos.splice(i, 1, userText)
+            console.log(todos);
+            display()
+        }
+    }
+
+
+    // let arr = [2, 4, 6, 7]
+    // arr.splice(2, 0, 45)
+    // console.log(arr);
+
+
+    function deleteTodo(i) {
+        todos.splice(i, 1)
+        display()
+    }
+
+    function display() {
+        preview.innerHTML = ''
+        todos.forEach((val, i) => {
+            preview.innerHTML += `<p> ${val} <button onclick="editTodo(${i})"> edit </button>  <button onclick="deleteTodo(${i})"> delete </button> </p>`
+
+        })
+    }
+
+
+</script>

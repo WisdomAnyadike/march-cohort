@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input" type="search" oninput="search()">
+    <div id="forItems">
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let products = ['rice', 'beans', 'onions', 'spagetti', 'bread']
+
+
+    function display(p) {
+        forItems.innerHTML = ''
+        p.forEach((val, i, arr) => {
+            forItems.innerHTML += `<p> ${val} </p>`
+        })
+    }
+
+    display(products)
+
+    function search() {
+        let filteredProducts = products.filter((product) => {
+            return product.includes(input.value.toLowerCase().trim().replaceAll(' ', ''))
+        })
+
+        if (filteredProducts.length === 0) {
+            forItems.innerHTML = `<p> product does not exist </p>`
+        } else {   
+            display(filteredProducts)
+        }
+
+    }
+
+    // let arr = [1,2,3,4]
+
+    // display(arr)
+
+</script>

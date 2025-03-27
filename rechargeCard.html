@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <select name="" id="Provider">
+        <option value=""> Choose Provider</option>
+        <option value="MTN"> MTN</option>
+        <option value="GLO"> GLO</option>
+        <option value="AIRTEL"> AIRTEL</option>
+        <option value="9MOBILE"> 9MOBILE</option>
+    </select>
+
+
+    <select name="" id="Amount">
+        <option value=""> Choose Amount</option>
+        <option value="100"> 100</option>
+        <option value="200"> 200</option>
+        <option value="500"> 500</option>
+        <option value="1000"> 1000</option>
+    </select>
+
+    <br>
+    <br>
+
+    <button onclick="generatePin()">Generate Pin</button>
+    <br>
+    <p id="mypin"> </p>
+
+    <br>
+    <br>
+
+    <input type="text" value="*311*pin#" placeholder="load card here">
+    <br>
+    <button onclick="loadCard()"> Load card</button>
+
+
+</body>
+
+</html>
