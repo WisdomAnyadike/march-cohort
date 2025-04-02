@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table,
+        td,
+        th,
+        tr,
+        thead,
+        tbody {
+            border-collapse: collapse;
+            padding: 10px;
+            border: 2px solid green;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,11 +48,98 @@
     <br>
     <br>
 
-    <input type="text" value="*311*pin#" placeholder="load card here">
+    <input id="myCode" type="text" value="*311*122222222222#" placeholder="load card here">
     <br>
     <button onclick="loadCard()"> Load card</button>
+
+
+
+    <div>
+        <table>
+            <thead>
+                <th> s/n</th>
+                <th> provider </th>
+                <th> amount </th>
+                <th> pin </th>
+                <th> validity </th>
+
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+
+    </div>
 
 
 </body>
 
 </html>
+<script>
+    let rechargeCards = []
+
+    function generatePin() {
+
+        if (Provider.value === '') {
+            alert('please select a provider')
+        }
+        else if (Amount.value === '') {
+            alert('please select an amount')
+        } else {
+
+            let rechargecode = Math.floor(Math.random() * 900000000000) + 100000000000 //3456789009876567
+
+            let rechargeCard = { provider: Provider.value, amount: Amount.value, rechargecode: rechargecode, used: false }
+
+            rechargeCards.push(rechargeCard)
+            console.log(rechargeCards);
+
+            mypin.innerHTML = `Pin: ${rechargecode}`
+
+            display()
+
+        }
+
+    }
+
+
+    function display() {
+        tbody.innerHTML = ''
+        rechargeCards.forEach((card, i, arr) => {
+            tbody.innerHTML += `<tr>
+                    <td> ${i + 1} </td>
+                    <td> ${card.provider} </td>
+                    <td>  ${card.amount} </td>
+                    <td> ${card.rechargecode}  </td>
+                    <td> ${card.used}  </td>
+                </tr>`
+        })
+
+    }
+
+    function loadCard() {
+
+        let foundcard = rechargeCards.find((card) => { return card.rechargecode == myCode.value.trim().slice(5, 17) })
+        console.log(myCode.value.trim().slice(5, 17));
+
+        if (myCode.value.trim() === '') {
+            alert('please input a valid code')
+        } else if (foundcard === undefined) {
+            alert('card does not exist')
+        } else if (myCode.value !== `*311*${foundcard.rechargecode}#`) {
+            alert('Please enter valid format')
+        }
+        else if (foundcard.used === true) {
+            alert("Card has been used")
+        } else {
+            foundcard.used = true
+            alert(`You have successfully recharged ${foundcard.provider} N${foundcard.amount}`)
+            display()
+
+        }
+    }
+
+
+
+
+</script>
