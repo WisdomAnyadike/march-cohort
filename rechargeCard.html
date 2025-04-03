@@ -48,13 +48,17 @@
     <br>
     <br>
 
-    <input id="myCode" type="text" value="*311*122222222222#" placeholder="load card here">
+    <input id="myCode" type="text" value="*311*#" placeholder="load card here">
     <br>
     <button onclick="loadCard()"> Load card</button>
 
 
 
     <div>
+
+        <button onclick="display(rechargeCards)"> all cards </button> <button onclick="displayUsed()"> used cards
+        </button> <button onclick="displayUnUsed()"> un-used cards </button>
+
         <table>
             <thead>
                 <th> s/n</th>
@@ -69,6 +73,13 @@
             </tbody>
         </table>
 
+        <span id="MTN">
+
+        </span>
+        <span id="GLO">
+
+        </span>
+
     </div>
 
 
@@ -76,7 +87,22 @@
 
 </html>
 <script>
-    let rechargeCards = []
+    let rechargeCards = JSON.parse(localStorage.getItem('marchRechargeCards')) || []
+    let mtnTotal = Number(localStorage.getItem('mtnTotalBalance')) || 0.00
+    let gloTotal = Number(localStorage.getItem('gloTotalBalance')) || 0.00
+
+    console.log(rechargeCards);
+
+
+    function displayAllBalances(params) {
+        MTN.innerHTML = ` MTN Balance : ${mtnTotal.toFixed(2)}`
+        GLO.innerHTML = ` GLO Balance : ${gloTotal.toFixed(2)}`
+    }
+
+    displayAllBalances()
+    
+
+    display(rechargeCards)
 
     function generatePin() {
 
@@ -92,20 +118,21 @@
             let rechargeCard = { provider: Provider.value, amount: Amount.value, rechargecode: rechargecode, used: false }
 
             rechargeCards.push(rechargeCard)
+            localStorage.setItem('marchRechargeCards', JSON.stringify(rechargeCards))
             console.log(rechargeCards);
 
             mypin.innerHTML = `Pin: ${rechargecode}`
 
-            display()
+            display(rechargeCards)
 
         }
 
     }
 
 
-    function display() {
+    function display(cards) {
         tbody.innerHTML = ''
-        rechargeCards.forEach((card, i, arr) => {
+        cards.forEach((card, i, arr) => {
             tbody.innerHTML += `<tr>
                     <td> ${i + 1} </td>
                     <td> ${card.provider} </td>
@@ -133,13 +160,65 @@
             alert("Card has been used")
         } else {
             foundcard.used = true
+            localStorage.setItem('marchRechargeCards', JSON.stringify(rechargeCards))
             alert(`You have successfully recharged ${foundcard.provider} N${foundcard.amount}`)
-            display()
+
+            // total += Number(foundcard.amount)
+            // localStorage.setItem('marchTotalBalance', total)
+            // displayBalance()
+            saveAndDisplay(foundcard.amount, foundcard.provider)
+            display(rechargeCards)
 
         }
     }
 
+    function displayUsed() {
+        let usedCards = rechargeCards.filter((card) => { return card.used === true })
+        display(usedCards)
+    }
 
+    function displayUnUsed() {
+        let unUsedCards = rechargeCards.filter((card) => { return card.used === false })
+        display(unUsedCards)
+    }
+
+
+
+    function saveAndDisplay(amount, prov) {
+        if (prov === 'MTN') {
+            mtnTotal += Number(amount)
+            localStorage.setItem('mtnTotalBalance', mtnTotal)
+        } else if (prov === 'GLO') {
+            gloTotal += Number(amount)
+            localStorage.setItem('gloTotalBalance', gloTotal)
+        }
+
+        displayAllBalances()
+    }
+
+
+    // // to empty your Local Storage
+    // localStorage.clear()
+
+    // // to add to your Local Storage
+    // localStorage.setItem('myNumber', JSON.stringify({ num: 1, school: "34" }))
+
+    // // to get value from your Local Storage
+    // console.log(JSON.parse(localStorage.getItem('myNumber')));
+
+    // // to remove specific item from your Local Storage
+    // localStorage.removeItem('myNumber')
+
+    // // console.log(JSON.parse(localStorage.getItem('myNumber')));
+
+
+
+    let man = 0 || null || undefined
+    console.log(man);
+
+
+    let value = Number(null)
+    console.log(value);
 
 
 </script>
