@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="email">
+    <input type="text" id="password">
+    <button onclick="login()"> login </button>
+
+</body>
+
+</html>
+<script>
+
+    let marchUserDatabase = JSON.parse(localStorage.getItem('march-cohort-data'))
+
+    function login() {
+
+        let foundUser = marchUserDatabase.find((user) => {
+
+            return user.userEmail === email.value.trim()
+        })
+
+        if (!foundUser) {
+            alert('user doesnt exist')
+        } else {
+
+            if (foundUser.userPassword === password.value.trim()) {
+                alert('login success')
+                window.location.href = 'dashboard.html'
+            } else {
+                alert('incorrect email or password')
+            }
+
+
+        }
+
+    }
+
+
+</script>

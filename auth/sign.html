@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sign.css">
+</head>
+
+<body>
+    <div class="Container">
+        <h2>Sign up</h2>
+        <p>Looking forward to seeing you soon, Wink Wink</p>
+        <input id="username" type="username" placeholder="Username" />
+        <input class="side" id="password" type="Password" placeholder="Password" />
+        <input class="side" id="confirmpassword" type="Password" placeholder="Confirm Password" />
+        <input class="side" id="email" type="email" placeholder="Email" />
+        <div style="display: flex; width: 100%; align-items: center;"><input style="width: 30%;" id="ourInput"
+                type="checkbox"> <span style="width: 70%; margin-top: 20px;"> agree to terms and conditions</span>
+        </div>
+
+        <button onclick="signUp()" class="Normal">
+            Enter</button>
+        <hr />
+        <button class="Social facebook">Facebook</button>
+        <button class="Social  twitter">Twitter</button>
+        <button class="Social google">Google</button>
+        <hr />
+        <p>Already Have a Account?</p>
+        <a href="#"> Sign in</a>
+    </div>
+</body>
+
+</html>
+<script>
+
+    // ourInput.checked = true
+
+    let marchUserDatabase = JSON.parse(localStorage.getItem('march-cohort-data')) || []
+
+    function signUp() {
+        let user = username.value.trim()
+        let userPassword = password.value.trim()
+        let userConfirmPassword = confirmpassword.value.trim()
+        let userEmail = email.value.trim()
+        let isAgreed = ourInput.checked
+
+        if (!user || !userPassword || !userEmail || !userConfirmPassword) {
+            alert('all fields are mandatory')
+        } else if (userPassword.length < 8) {
+            alert('password must not be less than 8 characters')
+        }
+        else if (userPassword !== userConfirmPassword) {
+            alert('password does not match')
+
+        } else if (marchUserDatabase.find((userObj) => { return userObj.userEmail === userEmail })) {
+            alert('user already exists')
+
+        } else if (!isAgreed) {
+            alert('sorry , agreee to terms and conditions')
+        }
+
+
+        else {
+            let userObj = {
+                user,
+                userPassword,
+                userEmail,
+                isAgreed
+            }
+
+            marchUserDatabase.push(userObj)
+            localStorage.setItem('march-cohort-data', JSON.stringify(marchUserDatabase))
+            alert('sign up successful')
+            console.log(marchUserDatabase);
+
+            window.location.href = 'login.html'
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+</script>
