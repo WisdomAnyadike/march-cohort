@@ -1,14 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #error {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
-    
+    welcome <span id="username"> </span>
+
+    <!-- <input type="text" id="input1" oninput="check()">
+    <input type="text" placeholder="password" id="input2" oninput="check()">
+    <input type="text" placeholder="confirmPassword" id="input3" oninput="check()">
+    <small id="error" style="color: red;"> password does not match</small>
+
+
+    <button id="ourButton" onclick="showLoading()"> click me </button> -->
+
 </body>
+
 </html>
 <script>
-    
+    let marchUserDatabase = JSON.parse(localStorage.getItem('march-cohort-data'))
+    let index = localStorage.getItem('loggedInUserIndex')
+    let currentUser = marchUserDatabase[index]
+
+    console.log(index);
+
+    username.innerText = currentUser.user
+
+
+
+
+
+    // ourButton.disabled = true
+
+    // function showLoading() {
+    //     ourButton.innerHTML = 'loading...'
+    //     ourButton.disabled = true
+
+
+    //     setTimeout(() => {
+    //         ourButton.disabled = false
+    //         alert('sign in successful')
+    //         ourButton.innerHTML = 'click me'
+    //     }, 3000)
+
+    // }
+
+
+
+    // function check() {
+
+    //     if (input2.value.trim() !== input3.value.trim()) {
+    //         error.style.display = "block"
+    //     } else {
+    //         error.style.display = "none"
+    //     }
+
+    //     forButton()
+
+    //     function forButton() {
+    //         if (input1.value.trim() && input2.value.trim() && input3.value.trim() && (input2.value.trim() === input3.value.trim()) ) {
+    //             ourButton.disabled = false
+    //         } else {
+    //             ourButton.disabled = true
+    //         }
+    //     }
+
+    // }
+
+
+
+
+
+
 </script>

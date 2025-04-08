@@ -20,7 +20,7 @@
                 type="checkbox"> <span style="width: 70%; margin-top: 20px;"> agree to terms and conditions</span>
         </div>
 
-        <button onclick="signUp()" class="Normal">
+        <button id="button" onclick="signUp()" class="Normal">
             Enter</button>
         <hr />
         <button class="Social facebook">Facebook</button>
@@ -40,47 +40,60 @@
     let marchUserDatabase = JSON.parse(localStorage.getItem('march-cohort-data')) || []
 
     function signUp() {
-        let user = username.value.trim()
-        let userPassword = password.value.trim()
-        let userConfirmPassword = confirmpassword.value.trim()
-        let userEmail = email.value.trim()
-        let isAgreed = ourInput.checked
-
-        if (!user || !userPassword || !userEmail || !userConfirmPassword) {
-            alert('all fields are mandatory')
-        } else if (userPassword.length < 8) {
-            alert('password must not be less than 8 characters')
-        }
-        else if (userPassword !== userConfirmPassword) {
-            alert('password does not match')
-
-        } else if (marchUserDatabase.find((userObj) => { return userObj.userEmail === userEmail })) {
-            alert('user already exists')
-
-        } else if (!isAgreed) {
-            alert('sorry , agreee to terms and conditions')
-        }
+        button.innerText = 'loading...'
+        button.disabled = true
 
 
-        else {
-            let userObj = {
-                user,
-                userPassword,
-                userEmail,
-                isAgreed
+
+        setTimeout(() => {
+
+            let user = username.value.trim()
+            let userPassword = password.value.trim()
+            let userConfirmPassword = confirmpassword.value.trim()
+            let userEmail = email.value.trim()
+            let isAgreed = ourInput.checked
+
+            if (!user || !userPassword || !userEmail || !userConfirmPassword) {
+                alert('all fields are mandatory')
+            } else if (userPassword.length < 8) {
+                alert('password must not be less than 8 characters')
+            }
+            else if (userPassword !== userConfirmPassword) {
+                alert('password does not match')
+
+            } else if (marchUserDatabase.find((userObj) => { return userObj.userEmail === userEmail })) {
+                alert('user already exists')
+
+            } else if (!isAgreed) {
+                alert('sorry , agreee to terms and conditions')
             }
 
-            marchUserDatabase.push(userObj)
-            localStorage.setItem('march-cohort-data', JSON.stringify(marchUserDatabase))
-            alert('sign up successful')
-            console.log(marchUserDatabase);
 
-            window.location.href = 'login.html'
+            else {
+                let userObj = {
+                    user,
+                    userPassword,
+                    userEmail,
+                    isAgreed
+                }
+
+                marchUserDatabase.push(userObj)
+                localStorage.setItem('march-cohort-data', JSON.stringify(marchUserDatabase))
+                alert('sign up successful')
+                console.log(marchUserDatabase);
+
+                window.location.href = 'login.html'
 
 
-        }
+            }
 
 
+            button.innerText = 'Enter'
+        button.disabled = false
+
+        }, 3000);
+
+      
 
     }
 
