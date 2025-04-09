@@ -6,14 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         #error {
             display: none;
+        }
+
+
+        .myNav {
+            height: 40px;
+            background-color: red;
+            display: flex;
+            width: 100%;
+            padding: 10px;
+            justify-content: space-between;
         }
     </style>
 </head>
 
 <body>
-    welcome <span id="username"> </span>
+
+
+
 
     <!-- <input type="text" id="input1" oninput="check()">
     <input type="text" placeholder="password" id="input2" oninput="check()">
@@ -23,6 +41,9 @@
 
     <button id="ourButton" onclick="showLoading()"> click me </button> -->
 
+
+
+
 </body>
 
 </html>
@@ -31,9 +52,78 @@
     let index = localStorage.getItem('loggedInUserIndex')
     let currentUser = marchUserDatabase[index]
 
+
+    if (!index) {
+        alert('unauthorized')
+        document.body.innerHTML = 'Loading....'
+        window.location.href = "login.html"
+    } else {
+        document.body.innerHTML = `<div>  <nav class="myNav">  welcome ${currentUser.user}  <button onclick="logOut()"> log out </button> </nav> 
+
+            <div id="makePost"> 
+            <input  type="text" placeholder="title" />
+            <input  type="text" placeholder="description" />
+            <input  id="inputFile" type="file" accept=".png,.jpg" onchange="pickPicture()" />
+            <img width="50" height="50"  id="image"/>
+                <button onclick="postBlog()"> post  </button>
+                
+                
+                </div>
+
+
+                // <button onclick="run(event)" > click this </button>
+
+
+                
+            
+            
+            
+            
+            
+            </div>`
+
+    }
+
+    // function run(params) {
+    //     console.log(params);
+    // }
+
+
+
+    function logOut() {
+        localStorage.removeItem('loggedInUserIndex')
+        alert('logout successful')
+        window.location.href = "login.html"
+    }
+
+
     console.log(index);
 
-    username.innerText = currentUser.user
+    function pickPicture() {
+        let inputFile = document.getElementById('inputFile') //input element
+        console.log(inputFile);
+        let file = inputFile.files[0]; // file Object
+
+        let myReader = new FileReader()
+
+        if (!file) {
+            alert('cant read file')
+        } else {
+            myReader.readAsDataURL(file)
+        }
+
+
+        myReader.addEventListener('load', (i) => {
+            let result = i.target.result
+            image.src = result
+            console.log(result);
+        })
+
+
+
+
+    }
+
 
 
 

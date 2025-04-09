@@ -32,9 +32,10 @@
 
             if (foundUser.userPassword === password.value.trim()) {
                 alert('login success')
-                window.location.href = 'dashboard.html'
                 let index = marchUserDatabase.findIndex((user) => { return user.userEmail === foundUser.userEmail })
                 localStorage.setItem('loggedInUserIndex', index)
+                window.location.href = 'dashboard.html'
+              
             } else {
                 alert('incorrect email or password')
             }
@@ -43,6 +44,12 @@
         }
 
     }
+
+    let marchUserDatabas = [
+        { userEmail: 'wisdom@gmail.com' },
+        { userEmail: 'anyadikewisdom@gamil.com' }
+    ]
+
 
 
 
