@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="number" id="num"> <button onclick="clickme(event)"> click </button>
+
+    <button class="hello" onclick="jump()" onmouseenter="" ondblclick="tryclick(event)"> you havent clicked me </button>
+
+</body>
+
+</html>
+<script>
+
+
+    function clickme(params) {
+        let number = num.value
+        let decreaser = setInterval(() => {
+
+            number--
+            num.value = number
+            if (number === 0) {
+                alert('time-out')
+                clearInterval(decreaser)
+            }
+
+        }, 2000);
+    }
+
+    function tryclick(params) {
+        params.target.previousElementSibling.innerHTML = 'dont click'
+        console.log(params.target.className);
+        console.log(params);
+    }
+
+
+
+    // let num = 10
+
+    // let colorInterval = setInterval(() => {
+    //     document.body.style.backgroundColor = generateRandomColor()
+    // num--
+    // console.log(num);
+    // if (num === 0) {
+    //     alert('thank you, no more changes')
+    //     document.body.style.backgroundColor = 'black'
+    //     clearInterval(colorInterval)
+    // }
+    // }, 5000)
+
+
+    // setTimeout(() => {
+    //     clearInterval(colorInterval)
+    //     document.body.style.backgroundColor = 'black'
+    // }, 10000)
+
+    function generateRandomColor() {
+        let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'a', 'b', 'c', 'd', 'e', 'f']
+        let hexaColor = ''
+
+        for (let index = 0; index < 6; index++) {
+            let picker = Math.floor(Math.random() * values.length) // 0 -15 //9
+            hexaColor = hexaColor + values[picker]
+        }
+
+        return `#${hexaColor}`
+
+    }
+
+    'rgb(100,255 , 56)'
+
+    '#23wew4'
+
+
+
+
+</script>
