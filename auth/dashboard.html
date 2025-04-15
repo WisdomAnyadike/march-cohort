@@ -41,6 +41,7 @@
 
     <button id="ourButton" onclick="showLoading()"> click me </button> -->
 
+    <span style="color: green;"> </span>
 
 
 
@@ -52,6 +53,8 @@
     let index = localStorage.getItem('loggedInUserIndex')
     let currentUser = marchUserDatabase[index]
 
+    // let blogPosts = currentUser.blogPosts || []
+    let blogPosts = currentUser.blogPosts
 
     if (!index) {
         alert('unauthorized')
@@ -61,8 +64,8 @@
         document.body.innerHTML = `<div>  <nav class="myNav">  welcome ${currentUser.user}  <button onclick="logOut()"> log out </button> </nav> 
 
             <div id="makePost"> 
-            <input  type="text" placeholder="title" />
-            <input  type="text" placeholder="description" />
+            <input   id="title" type="text" placeholder="title" />
+            <input id="description"  type="text" placeholder="description" />
             <input  id="inputFile" type="file" accept=".png,.jpg" onchange="pickPicture()" />
             <img width="50" height="50"  id="image"/>
                 <button onclick="postBlog()"> post  </button>
@@ -71,7 +74,12 @@
                 </div>
 
 
-                // <button onclick="run(event)" > click this </button>
+                <div id="preview"> 
+                    
+                    </div>
+
+
+                
 
 
                 
@@ -98,6 +106,8 @@
 
 
     console.log(index);
+
+
 
     function pickPicture() {
         let inputFile = document.getElementById('inputFile') //input element
@@ -126,6 +136,77 @@
 
 
 
+    function postBlog() {
+        if (!title.value.trim() || !description.value.trim() || !image.src) {
+            alert('all fields are mandatory')
+        } else if (blogPosts.find((post) => post.title === title.value.trim())) {
+            alert('blog already exists')
+        } else {
+            let blog = {
+                title: title.value.trim(),
+                description: description.value.trim(),
+                image: image.src,
+                isLiked: false
+            }
+
+            blogPosts.push(blog)
+            // currentUser.blogPosts = blogPosts
+            localStorage.setItem('march-cohort-data', JSON.stringify(marchUserDatabase))
+            display(blogPosts)
+
+
+
+        }
+    }
+
+
+
+    display(blogPosts)
+
+
+
+
+    function display(params) {
+        preview.innerHTML = ''
+        params.forEach((element, i) => {
+
+            preview.innerHTML += `
+            <p> Title : ${element.title} </p>
+            <p> Description : ${element.description} </p>
+            <img width="100" height="100" src="${element.image}" />
+            <button onclick="updateLike(${i})"> ${element.isLiked ? `<span style="color: green ;"> liked </span>` : `<span style="color: red ;"> not - liked </span>`} </button>
+            
+            `
+
+
+
+
+        });
+
+    }
+
+    function updateLike(i) {
+
+        currentUser.blogPosts[i].isLiked = !currentUser.blogPosts[i].isLiked
+        console.log(currentUser.blogPosts[i].isLiked);
+        localStorage.setItem('march-cohort-data', JSON.stringify(marchUserDatabase))
+        display(blogPosts)
+
+    }
+
+    [{}, {}, {}]
+
+
+
+
+    // let mroBJ = {
+    //     name: 'aina',
+    //     school: 'vcc'
+    // }
+
+    // mroBJ.blogPosts = []
+
+    // console.log(mroBJ);
 
 
 
@@ -171,7 +252,7 @@
     //set interval
 
 
-    
+
 
 
 

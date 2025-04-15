@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="password"> <button onclick="change(event)"> Show </button>
+
+</body>
+
+</html>
+<script>
+
+    function change(ev) {
+        ev.target.previousElementSibling.type = ev.target.previousElementSibling.type === 'password' ? 'text' : 'password'
+        ev.target.innerHTML = ev.target.previousElementSibling.type === 'password' ? 'Hide' : 'Show'
+    }
+
+</script>
