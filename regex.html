@@ -7,13 +7,19 @@
     <title>Document</title>
     <style>
         #error {
+            display: none;
             color: red;
         }
     </style>
 </head>
 
 <body>
- 
+
+    <input oninput="checkInput()" id="myInput" placeholder="strong password" type="text">
+    <small id="error"> </small>
+    <!-- <small id="problem"> </small> -->
+    <button id="BUTTON" onclick="submitInput()"> click </button>
+
 
 
 
@@ -21,7 +27,47 @@
 
 </html>
 <script>
-    
+    let passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[\W])[\S]{8,20}$/
+    let upperCaseRegex = /[A-Z]/
+    let numberRegex = /[0-9]/
+    let loweCaseRegex = /[a-z]/
+    let symbolRegex = /\W/
+    BUTTON.disabled = true
+
+    function checkInput() {
+
+        if (!passwordRegex.test(myInput.value.trim())) {
+
+            if (!upperCaseRegex.test(myInput.value.trim())) {
+                error.innerHTML = 'invalid format ,please add an uppercase letter'
+            } else if (!numberRegex.test(myInput.value.trim())) {
+                error.innerHTML = 'invalid format , please add an number'
+            } else if (!symbolRegex.test(myInput.value.trim())) {
+                error.innerHTML = 'invalid format , please add a symbol'
+            } else if (!loweCaseRegex.test(myInput.value.trim())) {
+                error.innerHTML = 'invalid format ,please add a lowercase letter'
+            } else {
+                error.innerHTML = 'invalid format ,length is below 8'
+            }
+
+            error.style.display = 'block'
+            BUTTON.disabled = true
+
+        } else {
+            error.style.display = 'none'
+            BUTTON.disabled = false
+
+        }
+
+
+    }
+
+
+
+
+
+
+
 
     // function testValue(ev) {
     //     console.log(ev);
@@ -117,6 +163,19 @@
 
 
 
-    
+    // +2348164934974
+    let phoneNumberRegex = /^([+]234||0)[7-9][0-1][0-9]{8}$/
+    console.log(phoneNumberRegex.test('+2349123456784'));
+
+    //anyadike@gmail.com.ng
+    let emailRegex = /^[a-zA-Z]+[\w]+@[a-zA-Z]+(.[a-zA-Z]{2,})+$/
+    console.log(emailRegex.test('anyadike@gmail.com.ng.org'));
+
+
+    //wisdomA123-/#
+
+    console.log(passwordRegex.test('Wisdom123#'));
+
+
 
 </script>
