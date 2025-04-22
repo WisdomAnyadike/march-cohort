@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="cbtTest">
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let index = 0
+    let score = []
+    let questions = [
+        {
+            question: 'what is your name?',
+            options: ['wisdom', 'tolu', 'david'],
+            answer: 'wisdom'
+        },
+        {
+            question: 'what is your school?',
+            options: ['sqi', 'nihort', 'aptech'],
+            answer: 'sqi'
+        }
+        , {
+            question: 'what is your course?',
+            options: ['js', 'react', 'node'],
+            answer: 'js'
+        }
+    ]
+
+    function displayCbt(button = '') {
+        cbtTest.innerHTML = ` <p> Question: ${questions[index].question}  </p>
+    <div id="forOptions">
+        
+        
+        </div>
+        <div> <button onclick="prev()"> prev</button>  ${button}  </div>`
+        displayOptions()
+    }
+
+
+    function displayOptions() {
+        forOptions.innerHTML = ''
+        for (let i = 0; i < questions[0].options.length; i++) {
+            forOptions.innerHTML += `  <p> <span>${questions[index].options[i]} </span> <input onchange="checkAnswer(${i})" type="radio" name='options' value=""> </p>
+        `
+        }
+    }
+
+
+
+    displayCbt(`<button onclick="next()" >next</button>`)
+
+    function next() {
+        if (index === questions.length - 2) {
+            index++
+            displayCbt(`<button onclick="submit()" > submit </button>`)
+        } else {
+            index++
+            displayCbt(`<button onclick="next()" >next</button>`)
+        }
+
+
+
+    }
+
+    function prev() {
+        if (index === 0) {
+            index = 0
+        } else {
+            index--
+            score.pop()
+        }
+        displayCbt(`<button onclick="next()" >next</button>`)
+
+
+    }
+
+
+    function checkAnswer(optionIndex) {
+        if (questions[index].options[optionIndex] === questions[index].answer) {
+
+            score.splice(index, 1, 5)
+            // score[index] = 5
+        } else {
+            score.splice(index, 1, 0)
+            // score[index] = 0
+        }
+        console.log(score);
+    }
+
+
+    function submit() {
+        let confirmSubmit = confirm('are you sure?')
+        if (confirmSubmit) {
+            let result = score.reduce((a,c) =>  a + c , 0) 
+            cbtTest.innerHTML = `your score is ${result}/${questions.length * 5} 
+            <p>  <button onclick="retake()"> Retake Cbt  </button> </p>`
+        }
+        
+    }
+
+    function retake() {
+        index = 0
+        score = []
+        displayCbt('<button onclick="next()" >next</button>')
+    }
+
+</script>
