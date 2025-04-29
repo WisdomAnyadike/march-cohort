@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="main">
+
+
+
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+    function displayHelloScreen(params) {
+        main.innerHTML = `hello class <button onclick="displayNextScreen()"> page 2 </button>`
+    }
+
+    displayHelloScreen()
+
+
+    function displayNextScreen() {
+        main.innerHTML = `
+        <button onclick="displayHelloScreen()"> back  </button>
+        im on the next page `
+
+    }
+
+
+
+    let array = [1, 2, 3, 4, 5]
+    let [, two, , four] = array
+
+    console.log(two);
+
+    // this only modifies the variable two, not the array
+    two = 25
+    console.log(array);
+
+    //this is what actually modifies the array
+    array[1] = 25
+
+
+    let myArr = [['micheal', 'damilare'], ['titilayo', 'usman']]
+    // original method 
+    let [frontRow, secondRow] = myArr
+    let [firstname, secondName] = frontRow
+    let [firstname1, secondName1 = 'hello'] = secondRow
+    console.log(frontRow, secondName1);
+
+
+
+    // one liner
+    // let [[firstname2, secondName2] = frontRow1, [firstname3, secondName3] = secondRow1] = myArr
+    // console.log(firstname2, firstname3, secondName2, secondName3);
+
+    function jump(params = 25) {
+        return `${params} jumps`
+    }
+
+    console.log(jump(2));
+
+
+    let ages = [23, 4, 5, 6, 7, 8, 9, 8, 765, 4]
+    console.log(Math.max(...ages));
+    console.log(Math.min(...ages));
+
+
+
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let [num1, num2, num3, ...otherNums] = nums
+
+    console.log(...otherNums);
+
+    let newArr = [1, 2, 3, 4, 5, 6, 6]
+    let newArr1 = [7, 8, 9, 10]
+    let newArrFinal = [...newArr, ...newArr1]
+    console.log(newArrFinal);
+
+    // console.log(...newArr.map((nums) => nums + 2 ))
+    console.log([1, 2, 3, 4, 5, 6, 6].map((nums) => nums + 2));
+
+
+    console.log(num1, num2, num3)
+    // console.log(rest)
+
+
+
+    const countries = [['Finland', 'Helsinki'], ['Sweden', 'Stockholm'], ['Norway', 'Oslo']]
+
+
+    countries.forEach(([firstCountry, secondCountry] = country, i, arr) => {
+        console.log(firstCountry, secondCountry);
+
+    })
+
+
+    const fullStack = [
+        ['HTML', 'CSS', 'JS', 'React'],
+        ['Node', 'Express', 'MongoDB']
+    ]
+
+    for (const [one, two, three, four = 'no other stack'] of fullStack) {
+        console.log(one, two, three, four);
+    }
+
+
+    let sum = 0
+    for (let index = 0; index < newArr.length; index++) {
+        sum = sum + newArr[index]
+
+    }
+
+    console.log(sum);
+
+
+    let obj = {
+        name: { name1: 'tolu' },
+        classs: 'js3'
+    }
+
+    let { classs: c, weight: w = 56 } = obj
+    // let { name1 } = name
+    // console.log(name);
+    console.log(c, w);
+
+
+
+
+
+    const rect = {
+        width: 20,
+        height: 10
+    }
+
+    // function calPeri() {
+    //     return 2 * (rect.width + rect.height)
+    // }
+
+    // calPeri()
+
+
+    //with destructuring
+    function calPeri({ width: w, height: h }) {
+        return 2 * (w + h)
+    }
+
+    console.log(calPeri(rect));
+
+
+
+
+    const todoList = [
+        {
+            task: 'Prepare JS Test',
+            time: '4/1/2020 8:30',
+            completed: true
+        },
+        {
+            task: 'Give JS Test',
+            time: '4/1/2020 10:00',
+            completed: false
+        },
+        {
+            task: 'Assess Test Result',
+            time: '4/1/2020 1:00',
+            completed: false
+        }
+    ]
+
+    for (const { task, completed, time } of todoList) {
+        console.log(task, completed, time);
+    }
+
+    let myObj = {
+        task: 'Assess Test Result',
+        time: '4/1/2020 1:00',
+        completed: false
+    }
+
+    let newObj = { ...myObj, completed: true }
+    console.log(newObj);
+
+
+
+</script>

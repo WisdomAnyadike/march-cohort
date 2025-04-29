@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+
+  <input type="text" id="username">
+  <input type="text" id="email">
+  <input type="text" id="password">
+  <input type="text" id="confirmpassword">
+  <button id="button" onclick="signup()"> continue</button>
+  <br>
+  <br>
+  <button id="button2" onclick="signupwithgoogle()"> sign in with google </button>
+
+</body>
+
+</html>
+<script>
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDlb6UCkNRrFzkUXvFgoRKQLGuDrrKfuNE",
+    authDomain: "march-9ad02.firebaseapp.com",
+    projectId: "march-9ad02",
+    storageBucket: "march-9ad02.firebasestorage.app",
+    messagingSenderId: "479210029855",
+    appId: "1:479210029855:web:ba10cafdfef4bab0f1262a"
+  };
+
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth()
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  function signup() {
+    let uservalue = username.value.trim()
+    let mail = email.value.trim()
+    let passkey = password.value.trim()
+    let confirmpasskey = confirmpassword.value.trim()
+    if (!uservalue || !mail || !passkey || !confirmpasskey) {
+      alert('all fields are mandatory')
+    } else if (passkey !== confirmpasskey) {
+      alert('passwords do not match')
+    } else {
+      button.innerHTML = 'Loading...'
+      button.disabled = true
+
+      auth.createUserWithEmailAndPassword(mail, passkey)
+        .then((userCredential) => {
+          // Signed in 
+          var user = userCredential.user;
+
+
+
+          user.updateProfile({
+            displayName: uservalue,
+          }).then(() => {
+            alert('sign up successful ')
+            sendMail()
+            window.location.href = "login.html"
+            button.innerHTML = 'continue'
+            button.disabled = false
+
+          }).catch((error) => {
+            alert("sign up successful , but couldnt update displayname ")
+            sendMail()
+            window.location.href = "login.html"
+            button.innerHTML = 'continue'
+            button.disabled = false
+          });
+
+
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(errorMessage)
+          button.innerHTML = 'continue'
+          button.disabled = false
+
+        })
+    }
+
+
+
+  }
+
+  function sendMail() {
+    auth.currentUser.sendEmailVerification()
+      .then(() => {
+      }).catch((error) => {
+      })
+  }
+
+
+
+  function signupwithgoogle() {
+    button2.innerHTML = 'Loading...'
+    button2.disabled = true
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+        // ...
+        button2.innerHTML = 'sign in with google'
+        button2.disabled = false
+        alert('sign up successful')
+        window.location.href = 'dashboard.html'
+
+      }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage)
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        button2.innerHTML = 'sign in with google'
+        button2.disabled = false
+        // ...
+      });
+  }
+
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="formodal">
+
+    </div>
+
+    change password
+    <input type="text">
+
+    change username
+    <input type="text">
+
+</body>
+
+</html>
+<script>
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDlb6UCkNRrFzkUXvFgoRKQLGuDrrKfuNE",
+        authDomain: "march-9ad02.firebaseapp.com",
+        projectId: "march-9ad02",
+        storageBucket: "march-9ad02.firebasestorage.app",
+        messagingSenderId: "479210029855",
+        appId: "1:479210029855:web:ba10cafdfef4bab0f1262a"
+    };
+
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth()
+
+    function checkUser() {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                var uid = user.uid;
+                console.log(user);
+                if (!user.emailVerified) {
+                    formodal.innerHTML = `<div id="myDiv" style="background-color: rgba(255, 0, 0, 0.41); ">
+        <button onclick="removeText()">close </button>
+
+        Please verify your mail
+
+    </div>`
+                } else {
+                    formodal.innerHTML = ''
+                }
+
+                // ...
+            } else {
+                window.location.href = "login.html"
+                // User is signed out
+                // ...
+            }
+        });
+    }
+
+    checkUser()
+
+    function removeText(params) {
+        formodal.style.display = "none"
+    }
+
+
+
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+    <input type="text" id="email">
+    <input type="text" id="password">
+    <button id="button" onclick="login()"> continue </button>
+
+</body>
+
+</html>
+<script>
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDlb6UCkNRrFzkUXvFgoRKQLGuDrrKfuNE",
+        authDomain: "march-9ad02.firebaseapp.com",
+        projectId: "march-9ad02",
+        storageBucket: "march-9ad02.firebasestorage.app",
+        messagingSenderId: "479210029855",
+        appId: "1:479210029855:web:ba10cafdfef4bab0f1262a"
+    };
+
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth()
+
+    function login(params) {
+        if (!email.value.trim() || !password.value.trim()) {
+            alert('all fields are mamdatory')
+        } else {
+            button.innerHTML = 'Loading...'
+            button.disabled = true
+
+            auth.signInWithEmailAndPassword(email.value.trim(), password.value.trim())
+                .then((userCredential) => {
+
+                    var user = userCredential.user;
+                    if (!user.emailVerified) {
+                        sendMail()
+                    }
+                    alert('login success')
+                    window.location.href = 'dashboard.html'
+                    button.innerHTML = 'continue'
+                    button.disabled = false
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage)
+                    button.innerHTML = 'continue'
+                    button.disabled = false
+
+                });
+        }
+    }
+
+    function sendMail() {
+    auth.currentUser.sendEmailVerification()
+      .then(() => {
+      }).catch((error) => {
+      })
+  }
+
+
+
+
+
+
+</script>
