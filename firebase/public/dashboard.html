@@ -7,6 +7,14 @@
     <title>Document</title>
     <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-database-compat.js"></script>
+    <style>
+        .blockmssg {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,14 +22,26 @@
                 loading.... </span></span> <button onclick="settings()">settings</button> <button onclick="logOut()">log
             out</button></p>
 
+    <div id="forMessages">
+        loading....
+    </div>
+
+    <div id="previewMessages">
+
+
+    </div>
+
+
 </body>
 
 </html>
 <script>
 
+
     const firebaseConfig = {
         apiKey: "AIzaSyDlb6UCkNRrFzkUXvFgoRKQLGuDrrKfuNE",
         authDomain: "march-9ad02.firebaseapp.com",
+        databaseURL: "https://march-9ad02-default-rtdb.firebaseio.com",
         projectId: "march-9ad02",
         storageBucket: "march-9ad02.firebasestorage.app",
         messagingSenderId: "479210029855",
@@ -29,14 +49,18 @@
     };
 
 
+    // let currentUser
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth()
+    const database = firebase.database();
+    let chatIndex
 
     function checkUser() {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 var uid = user.uid;
                 console.log(user);
+                // currentUser = user.displayName
                 userval.innerHTML = user.displayName
                 // ...
             } else {
@@ -63,5 +87,65 @@
         window.location.href = "settings.html"
     }
 
+
+    function sendMssg() {
+        if (!messageInput.value.trim()) {
+            alert('please send a message')
+            return
+        }
+
+
+        if (!chatIndex && chatIndex !== 0) {
+            alert('cant send a message at the moment')
+            return
+        }
+
+        database.ref('chats/' + chatIndex).set({
+            sender: auth.currentUser.displayName,
+            message: messageInput.value.trim(),
+            time: new Date().toLocaleTimeString(),
+            photoURL: auth.currentUser.photoURL ? auth.currentUser.photoURL : 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
+        }).then(() => {
+            messageInput.value = ''
+        }).catch((error) => {
+            alert(error)
+        })
+
+    }
+
+
+    function displayMessages() {
+        database.ref('chats').on('value', (snapshot) => {
+            const data = snapshot.val() || [];
+            forMessages.innerHTML = `<input type="text" id="messageInput">
+        <button id="button" onclick="sendMssg()"> enter </button>`
+            console.log(data);
+            chatIndex = data.length
+
+            previewMessages.innerHTML = ''
+            data.forEach(({ sender, message, time, photoURL }, i) => {
+                let photo = auth.currentUser.displayName === sender ? auth.currentUser.photoURL ? auth.currentUser.photoURL : 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg' : photoURL
+
+                previewMessages.innerHTML += `
+                <div class="blockmssg"> 
+                    <img width="50" height="50" style="border-radius:50%;" src="${photo}"/> 
+                    <div> 
+                        <span> sender: ${sender} </span>
+                <span> message: ${message} </span>
+                <span> time: ${time} </span> 
+                </div>
+                    </div>
+
+                    <br>
+                    <br>
+                
+                
+                `
+
+            })
+        });
+    }
+
+    displayMessages()
 
 </script>

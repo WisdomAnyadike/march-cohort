@@ -16,9 +16,22 @@
     <div id="formodal">
 
     </div>
+    <br>
+    <br>
+    <div>
+        <img width="50" id="image" height="50" style="border-radius: 50%;" alt="">
+        <br>
+        <br>
+        <input type="file" onchange="pickPicture(event)" accept=".png,.jpg">
+        <p id="loadingState"> </p>
 
+    </div>
+    <br>
+    <br>
     change password
     <input type="text">
+    <br>
+    <br>
 
     change username
     <input type="text">
@@ -46,13 +59,14 @@
             if (user) {
                 var uid = user.uid;
                 console.log(user);
+                user.photoURL ? image.src = user.photoURL : image.src = 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
                 if (!user.emailVerified) {
                     formodal.innerHTML = `<div id="myDiv" style="background-color: rgba(255, 0, 0, 0.41); ">
-        <button onclick="removeText()">close </button>
+               <button onclick="removeText()">close </button>
 
-        Please verify your mail
+                 Please verify your mail
 
-    </div>`
+                </div>`
                 } else {
                     formodal.innerHTML = ''
                 }
@@ -72,6 +86,54 @@
         formodal.style.display = "none"
     }
 
+    function pickPicture(ev) {
+        loadingState.innerHTML = "loading..."
+        let file = ev.target.files[0]
+        if (!file) {
+            alert('file doesnt exist')
+            return
+        }
+        let formData = new FormData()
+        formData.append('file', file)
+        formData.append('upload_preset', 'newfold')
 
+        fetch('https://api.cloudinary.com/v1_1/anyacodes/image/upload', {
+            method: "POST",
+            body: formData
+        }).then((res) => {
+
+            return res.json()
+
+        }).
+            then((data) => {
+
+                console.log(data);
+
+                const user = firebase.auth().currentUser;
+                user.updateProfile({
+                    photoURL: data.secure_url
+                }).then(() => {
+                    showLoadState('success')
+                    image.src = data.secure_url
+                }).catch((error) => {
+                        showLoadState(error) 
+              });
+
+            }).
+            catch((err) => {
+                alert(err)
+                showLoadState(err)
+            })
+
+
+    }
+
+
+    function showLoadState(params) {
+        loadingState.innerHTML = params
+        setTimeout(() => {
+            loadingState.innerHTML = ""
+        }, 2000);
+    }
 
 </script>
