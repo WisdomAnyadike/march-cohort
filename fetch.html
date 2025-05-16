@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+        :root {
+            --circle-size: 0%;
+            /* Set the initial size */
+        }
+
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            max-height: fit-content;
+            font-family: "Inter", sans-serif;
+            background: hsla(186, 33%, 94%, 1);
+
+            background: linear-gradient(90deg,
+                    hsla(186, 33%, 94%, 1) 0%,
+                    hsla(216, 41%, 79%, 1) 100%);
+
+            background: -moz-linear-gradient(90deg,
+                    hsla(186, 33%, 94%, 1) 0%,
+                    hsla(216, 41%, 79%, 1) 100%);
+
+            background: -webkit-linear-gradient(90deg,
+                    hsla(186, 33%, 94%, 1) 0%,
+                    hsla(216, 41%, 79%, 1) 100%);
+
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#EBF4F5", endColorstr="#B5C6E0", GradientType=1);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            max-width: fit-content;
+            position: relative;
+        }
+
+        .card {
+            pointer: none;
+            width: 300px;
+            margin: 0;
+        }
+
+        #card1 img,
+        #overlay img {
+            width: 90%;
+            height: 80%;
+            position: relative;
+            border-radius: 10px;
+            object-fit: cover;
+            object-position: center center;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .container-text {
+            padding: 2rem 1rem;
+            height: 40%;
+            background-color: white;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        #card1,
+        #overlay {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8.5px);
+            -webkit-backdrop-filter: blur(8.5px);
+        }
+
+        .firstPart {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-flow: column;
+            padding: 0 0 2em 0;
+            height: 60%;
+        }
+
+        #rowOne h2 {
+            color: white;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            clip-path: circle(var(--circle-size) at var(--x) var(--y));
+            transition: clip-path 0.1s;
+            opacity: 0;
+        }
+
+        #rowOne {
+            background-color: #141312;
+        }
+
+        #rowTwo {
+            background: #0be477;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: end;
+            height: 30px;
+        }
+
+        .read-more {
+            background-color: black;
+            padding: 0.5em;
+            border-radius: 30px;
+            align-self: center;
+        }
+
+        .svg_icon {
+            border-radius: 100%;
+            width: 15px;
+            height: 15px;
+            padding: 0.5em;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .green {
+            background-color: #0be477;
+            fill: black;
+            color: black;
+        }
+
+        .black {
+            background-color: #141312;
+            color: white;
+            fill: white;
+        }
+
+        p {
+            padding: 0 0 1em 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;">
+
+
+
+
+
+
+
+    </div>
+</body>
+
+</html>
+<script>
+
+    function displayProducts(params) {
+
+        fetch('https://dummyjson.com/products').
+            then((res) => res.json()).
+            then((data) => {
+                document.querySelector('.container').innerHTML = ''
+                data.products.forEach(({ images, description, title, brand, category }, i) => {
+                    document.querySelector('.container').innerHTML += `<div class="card card-photo" style="margin: 20px;height: 750px; width:350px;">
+		<div id="card1" class="card-photo">
+			<div id="rowOne" class="firstPart">
+				<h2>  ${title ? title : 'No Title..'} </h2>
+				<img width="200" height="200" src="${images[0]}" alt="A person's hand holding a sparkler" title="Photo by Cristian Escobar for Unsplash">
+			</div>
+			<div class="container-text">
+				<H2> ${brand ? brand : 'No Brand..'}</H2>
+                <p> ${description}</p>
+				<div class="btn">
+                    
+                    <a onclick="seeMore(${i})" class="read-more black">
+                    Read more
+                    </a>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg_icon black">
+						<!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+						<path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+		
+	</div>`
+
+
+
+                });
+
+
+
+
+
+
+
+
+            }).catch((err) => console.log(err))
+
+    }
+
+
+    displayProducts()
+
+
+
+    async function seeMore(index) {
+        const res = await fetch(`https://dummyjson.com/products/${index + 1}`);
+        const data = await res.json()
+
+        console.log(data);
+
+        document.querySelector('.container').innerHTML = ` 
+        
+        <button onclick="displayProducts()"> back </button>
+
+
+        ${data.description}
+        ${data.brand}
+      <img src="${data.images[0]}" width='200' height="300">
+
+
+
+
+
+        `
+
+    }
+
+
+
+
+</script>
